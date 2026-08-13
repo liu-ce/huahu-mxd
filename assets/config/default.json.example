@@ -1,13 +1,6 @@
 {
   "version": 81,
   "game": "冒险岛韩服",
-  "server": {
-    "host": "https://your-api.example.com",
-    "update_endpoint": "/api/apk/latest2"
-  },
-  "download": {
-    "base_url": "https://your-download.example.com/"
-  },
   "app_packages": {
     "game": "com.nexon.mod",
     "kit": "fun.kitsunebi.kitsunebi4android",
