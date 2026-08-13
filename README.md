@@ -1,49 +1,115 @@
 # huahu-mxd
 
-冒险岛韩服自动化脚本。
+冒险岛韩服自动化脚本。**纯本地运行**：挂机逻辑、地图参数都在仓库里的 JSON 和 Go 代码中，不依赖云控、中控或远程下发配置。
 
-## 配置
+## 快速开始
 
-复制 `assets/config/default.json.example` 为 `assets/config/default.json`，填入 OCR、OSS、SLS、AI 等密钥。
+1. 复制 `assets/config/default.json.example` → `assets/config/default.json`
+2. 去 [番茄 OCR 官网](https://52tomato.com/) 购买 **1000 口** 套餐（不贵），把 `license_key` 填进 `default.json` 的 `ocr` 段
+3. 准备 **AutoGo 1.14.2**（见下方说明），在 `go.mod` 里 `replace` 到本地 `./AutoGo`
+4. 准备 `resources/` 原生库（本地编译用，不上传 GitHub，需自行从构建环境拷贝）
+5. 改 `main.go` 里的默认地图，或按 UI 写死地图名
+6. 编译运行，建议先用 **抢夺宝物岛** 跑通流程
 
-模板里**不包含**服务端地址和下载地址——本项目默认不依赖中控下发配置或 APK 热更新。
+默认测试地图（`main.go` 已写死）：
 
-## 服务端代码说明（可自行裁剪）
+```go
+挂机地图 := "韩服抢夺宝物岛"
+// 对应 assets/config/farm_map_韩服抢夺宝物岛.json
+```
 
-仓库里仍保留了一部分历史服务端交互代码。**实际有用的通常只有两类：**
+## 番茄 OCR（必配）
 
-1. **卡密验证** — 登录鉴权（`core/user.go` 的 `Login` / `LoginAndSetup`）
-2. **统计数据** — GM 巡逻答题上报（`core/answer_record.go`）、运行日志（`core/sls.go`，可选）
+OCR 使用 **番茄 OCR（TomatoOCR）**，代码在 `TomatoOCR/`、`core/ocr.go`。
 
-其余服务端能力可按需删除或停用，例如：
+- Token 即 `default.json` → `ocr.license_key`
+- 自行去官网注册购买，**1000 口** 够用且便宜
+- 未配置或过期会导致读字、读等级等功能失败
 
-| 可删 / 可关 | 作用 |
-|-------------|------|
-| `util/apk.go` | APK 检查更新、下载安装 |
-| `LoginAndSetup` 里的 `RefreshConfig`、`RefreshQuestionBank` | 从服务端拉角色配置、题库 |
-| `core/api.go` 的 `GetConfig*` 系列 | 读服务端下发的挂机参数 |
-| `play/farm_role_update.go`、`job/读取数据.go` | 中控通讯、`RoleUpdate` 上报 |
-| `job/role_silver_loop.go` 中的 `RoleUpdate` | 定时向中控同步角色数据 |
+## AutoGo 版本
+
+本项目按 **AutoGo 1.14.2** 开发和调试。
+
+`go.mod` 示例：
+
+```go
+require github.com/Dasongzi1366/AutoGo v0.0.0-...
+replace github.com/Dasongzi1366/AutoGo => ./AutoGo
+```
+
+`./AutoGo` 目录需自行放置对应版本源码（已在 `.gitignore`，不进仓库）。
+
+可以用更新版本的 AutoGo，但 API、打包方式可能有变动，**需要你自己会改**（路径、依赖、JNI 库等）。不熟的话先用 **1.14.2** 最省事。
+
+## 一切用本地脚本
+
+| 本地已有 | 说明 |
+|----------|------|
+| `assets/config/farm_map_*.json` | 各地图挂机参数 |
+| `assets/config/scene_map.json` | 场景相关 |
+| `play/` | 各地图玩法实现 |
+| `assets/img/` | 图色、模板图 |
+
+**不需要云端**：不必接中控、不必拉远程配置、不必 APK 热更新。地图在 UI 或 `main.go` 写死名字即可。
+
+挂机细节（攻击间隔、清包、巡逻等）优先改对应 `farm_map_*.json`，或改 `play/` 里具体地图文件。
+
+## 云控 / 服务端代码（建议删掉）
+
+仓库里还留着历史云控、中控相关代码，**纯本地用法用不上**。可以让 AI 帮你整体删除或 stub 掉，例如：
+
+| 文件 / 模块 | 作用（可删） |
+|-------------|--------------|
+| `main.go` 里 `core.API.LoginAndSetup(...)` | 登录云控、拉远程配置 |
+| `core/user.go` | 登录、`RefreshConfig`、`RoleUpdate` |
+| `core/api.go` | HTTP 客户端、`GetConfig*` 读云端配置 |
+| `core/question_bank.go` | 远程题库 |
+| `core/answer_record.go` | 答题记录上报云端 |
+| `core/sls.go` | 阿里云日志上报 |
+| `util/oss.go`、`util/apk.go` | OSS 截图、APK 更新下载 |
 | `util/config_checker.go` | 远程配置版本检查 |
+| `play/farm_role_update.go` | 定时 `RoleUpdate` 推中控 |
+| `job/读取数据.go`、`job/role_silver_loop.go` | 中控通讯、金币同步 |
 
-若保留卡密验证，API 基址请在本地 `default.json` 自行添加，或直接写死在 `core/api.go` 的 `NewAPIClient`（原 `server.host` 字段已移出模板）。
+**本地最小跑通** 大致只需：
 
-挂机参数（攻击间隔、自动清包等）建议改为读本地 `farm_map_*.json` 或代码常量，不再走服务端配置。
+- `play/` + `assets/config/farm_map_*.json` — 挂机
+- `captcha/` — 验证码 / GM 巡逻（若需要）
+- `TomatoOCR` + `ocr.license_key` — 识字
+- `core/` 里与图色、 motion、opencv 相关的部分
+
+删掉登录后，`main.go` 可直接进挂机，例如：
+
+```go
+func main() {
+    // 本地模式：跳过 LoginAndSetup
+    挂机地图 := "韩服抢夺宝物岛"
+    go captcha.Run() // 不需要验证码检测可注释
+    play.RunAutoFarm(fmt.Sprintf("config/farm_map_%s.json", 挂机地图))
+}
+```
+
+`default.json` 里 **OSS、SLS、lemon_api** 等也是云端/第三方服务，纯本地可留空或让 AI 一并移除相关调用。
 
 ## 地图选择
 
-**建议在 UI 层写死地图**，不要从服务端读 `挂机地图`。
+地图名写死在 UI 或 `main.go`，规则：
 
-`main.go` 中把地图名写死即可，文件名规则：`assets/config/farm_map_<地图名>.json`：
-
-```go
-// 示例：UI 固定选「韩服研究所C1」
-挂机地图 := "韩服研究所C1"
-play.RunAutoFarm(fmt.Sprintf("config/farm_map_%s.json", 挂机地图))
+```
+assets/config/farm_map_<地图名>.json
 ```
 
-现有地图配置见 `assets/config/farm_map_*.json`。
+现有配置见 `assets/config/farm_map_*.json`。换地图只改字符串，例如 `"韩服研究所C1"`、`"land赫勒地区走路版"`。
 
 ## 构建
 
-依赖 AutoGo 本地 replace，见 `go.mod`。
+- Go 版本见 `go.mod`
+- AutoGo 本地 `replace` 到 `./AutoGo`（**1.14.2** 推荐）
+- `resources/` 需本地准备（`.gitignore` 已排除）
+
+## 配置模板说明
+
+`default.json.example` **不含** `server`、`download` 等云控字段。按需保留：
+
+- **必填（OCR）**：`ocr.license_key`
+- **可选**：`lemon_api`（GM 巡逻 AI）、`oss` / `sls`（上报类，纯本地可删代码后忽略）

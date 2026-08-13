@@ -68,7 +68,7 @@ func main() {
 
 	// 地图名写死在 UI / 代码里，对应 assets/config/farm_map_<名>.json
 	// 挂机地图 := core.API.GetConfigStringValue("挂机地图") // 旧：从中控读取
-	挂机地图 := "韩服研究所C1" // 按你的 UI 选项改这里
+	挂机地图 := "韩服抢夺宝物岛" // 入门测试地图，对应 farm_map_韩服抢夺宝物岛.json
 	fmt.Println(挂机地图)
 	core.ExitOnGameExceptionIfNeeded = ExitOnGameExceptionIfNeeded
 
