@@ -1,0 +1,17 @@
+# AutoGo 本地 replace（github.com/Dasongzi1366/AutoGo => ./AutoGo）
+/AutoGo/
+/autogo/
+/.gocache/
+
+# 构建产物与大体积资源
+/build/
+/resources/
+*.exe
+*.apk
+*.ipa
+
+# IDE
+/.idea/
+
+# 本地密钥配置（提交 default.json.example）
+/assets/config/default.json

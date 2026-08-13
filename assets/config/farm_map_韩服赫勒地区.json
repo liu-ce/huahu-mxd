@@ -1,0 +1,21 @@
+{
+  "name": "赫勒地区",
+  "type": "直线图",
+  "attack_loop_pause_ms": 0,
+  "attack_face_settle_ms": 0,
+  "disable_monster_scan": true,
+  "after_teleport_attack_min": 0,
+  "after_teleport_attack_max": 8,
+  "world_probe": [37, 3, 215, 52],
+  "world_probe_imgs": "img/game/左上角.png",
+  "delete_yellow": [8, 91, 160, 181],
+  "rules": [
+    {
+      "layer": 1,
+      "y_min": 130,
+      "y_max": 140,
+      "x_min": 27,
+      "x_max": 95
+    }
+  ]
+}

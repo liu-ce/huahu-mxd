@@ -1,0 +1,80 @@
+{
+  "name": "抢夺宝物岛",
+  "type": "抢夺宝物岛",
+  "monster_allowlist": ["海盗"],
+  "min_monster_score": 0.3,
+  "skip_monster_scan_rel_x_above": 9999,
+  "yolo_regions": {
+    "1": [7, 201, 1154, 497],
+    "2": [5, 230, 1267, 505],
+    "3": [29, 269, 1219, 567]
+  },
+  "attack_regions": {
+    "1": [224, 276, 1089, 548],
+    "2": [454,290,898,536],
+    "3": [401,319,827,532]
+  },
+  "treasure_island": {
+    "down_jump_y_min": 100,
+    "down_jump_y_max": 132,
+    "down_jump_wait_ms": 400,
+    "ascend_wait_ms_min": 300,
+    "ascend_wait_ms_max": 400,
+    "fight_monster_min": 1,
+    "min_farm_stay_sec": 15,
+    "fight_center_tolerance": 8,
+    "farm_jump_sec_min": 20,
+    "farm_jump_sec_max": 25,
+    "delete_yellow": [26, 95, 170, 204],
+    "layers": [
+      {
+        "layer": 1,
+        "y_min": 134,
+        "y_max": 138,
+        "fight_x_min": 20,
+        "fight_x_max": 55,
+        "patrol_x_inset": 6,
+        "fight_attack_min": 2,
+        "min_farm_stay_sec": 20,
+        "max_stay_sec": 30,
+        "descend_x_threshold": 60,
+        "descend_walk_ms_min": 500,
+        "descend_walk_ms_max": 700
+      },
+      {
+        "layer": 2,
+        "y_min": 148,
+        "y_max": 152,
+        "fight_x_min": 20,
+        "fight_x_max": 65,
+        "patrol_x_inset": 6,
+        "min_farm_stay_sec": 40,
+        "max_stay_sec": 60,
+        "ascend_x": 14,
+        "ascend_x_tolerance": 3,
+        "ascend_zone_x_tolerance": 4,
+        "ascend_zone_yolo_region": [103, 263, 966, 556],
+        "ascend_zone_attack_region": [394, 267, 739, 529],
+        "descend_x_threshold": 80,
+        "descend_walk_ms_min": 500,
+        "descend_walk_ms_max": 700
+      },
+      {
+        "layer": 3,
+        "y_min": 161,
+        "y_max": 170,
+        "fight_x_min": 10,
+        "fight_x_max": 75,
+        "fight_attack_min": 2,
+        "max_stay_sec": 30,
+        "ascend_x": -1,
+        "ascend_x_tolerance": 3,
+        "ascend_zone_x_tolerance": 8,
+        "ascend_zone_yolo_region": [15, 267, 1265, 547],
+        "ascend_zone_attack_region": [121, 305, 650, 610]
+      }
+    ]
+  },
+  "rules": [],
+  "exceptions": []
+}

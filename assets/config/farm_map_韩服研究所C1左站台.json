@@ -1,0 +1,19 @@
+{
+  "name": "研究所C1左站台",
+  "type": "研究所C1左站台",
+  "stairs": {
+    "target_x": 9,
+    "target_x_tolerance": 3,
+    "y_min": 127,
+    "y_max": 131,
+    "recover_x_min": -2,
+    "recover_x_max": 9,
+    "face_switch_sec_min": 10,
+    "face_switch_sec_max": 20,
+    "face_switch_pause_ms": 800,
+    "fall_teleport_wait_ms": 500,
+    "stairs_down_jump_wait_ms": 400,
+    "teleport_x_delta_min": 4,
+    "recover_walk_multiplier": 3
+  }
+}

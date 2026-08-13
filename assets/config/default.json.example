@@ -1,0 +1,42 @@
+{
+  "version": 81,
+  "game": "冒险岛韩服",
+  "server": {
+    "host": "https://your-api.example.com",
+    "update_endpoint": "/api/apk/latest2"
+  },
+  "download": {
+    "base_url": "https://your-download.example.com/"
+  },
+  "app_packages": {
+    "game": "com.nexon.mod",
+    "kit": "fun.kitsunebi.kitsunebi4android",
+    "nekobox": "moe.nb4a"
+  },
+  "ocr": {
+    "license_key": "YOUR_TOMATO_OCR_LICENSE_KEY"
+  },
+  "sls": {
+    "access_key_id": "",
+    "access_key_secret": "",
+    "endpoint": "cn-beijing.log.aliyuncs.com",
+    "project": "your-project",
+    "logstore": "your-logstore"
+  },
+  "oss": {
+    "access_key_id": "",
+    "access_key_secret": "",
+    "endpoint": "oss-cn-beijing.aliyuncs.com",
+    "bucket": "your-bucket",
+    "region": "cn-beijing",
+    "enable_vpn_detection": true
+  },
+  "captcha": {
+    "follow_target": false
+  },
+  "lemon_api": {
+    "base_url": "https://www.lemonapi.ai/v1",
+    "api_key": "",
+    "model": "[L]claude-opus-4-8"
+  }
+}

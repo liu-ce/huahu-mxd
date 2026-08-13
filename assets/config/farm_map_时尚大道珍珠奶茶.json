@@ -1,0 +1,54 @@
+{
+  "name": "时尚大道",
+  "monster_allowlist": ["珍珠奶茶"],
+  "min_monster_score": 0.19,
+  "min_monsters_to_attack": 2,
+  "type": "定制_时尚大道",
+  "disable_monster_scan": true,
+  "after_teleport_attack_min": 1,
+  "after_teleport_attack_max": 4,
+  "min_stay_sec": 2,
+  "max_stay_sec": 12,
+  "attack_loop_pause_ms": 180,
+  "world_probe": [139, 0, 292, 44],
+  "world_probe_imgs": "img/game/左上角.png",
+  "delete_yellow": [11, 97, 243, 183],
+  "yolo_regions": {
+    "1": [9,174,1246,475],
+    "2": [0,250,1270,660]
+  },
+  "attack_regions": {
+    "1": [439,130,898,537],
+    "2": [400,223,876,685]
+  },
+  "ring": {
+    "layer1_y_min": 120,
+    "layer1_y_max": 132,
+    "layer2_y_min": 150,
+    "layer2_y_max": 160,
+    "teleport_far_px": 15,
+    "walk_ms": 500,
+    "layer1_rel_x_max": 75,
+    "A": { "layer": 1, "x_min": -90, "x_max": -80 },
+    "B": { "layer": 1, "x_min": 70, "x_max": 100 },
+    "C": { "layer": 2, "x_min": 75, "x_max": 79 },
+    "D": { "layer": 2, "x_min": -90, "x_max": -80 }
+  },
+  "rules": [
+    {
+      "y_min": 125,
+      "y_max": 129,
+      "x_min": 95,
+      "x_max": 130,
+      "action": "teleport_left"
+    },
+    {
+      "y_min": 152,
+      "y_max": 160,
+      "x_min": 95,
+      "x_max": 130,
+      "action": "teleport_left"
+    }
+  ],
+  "exceptions": []
+}

@@ -1,0 +1,33 @@
+{
+  "name": "浪里个浪001",
+  "type": "浪里个浪001",
+  "langligelang001": {
+    "lower_x_min": -85,
+    "lower_x_max": 110,
+    "lower_y_min": 145,
+    "lower_y_max": 155,
+    "upper_y_min": 117,
+    "upper_y_max": 127,
+    "patrol_teleport_margin": 12,
+    "teleport_hold_min_ms": 50,
+    "teleport_hold_max_ms": 100,
+    "after_teleport_wait_min_ms": 20,
+    "after_teleport_wait_max_ms": 50,
+    "attack_hold_min_ms": 100,
+    "attack_hold_max_ms": 150,
+    "down_jump_check_ms": 200,
+    "down_jump_max_retry": 5,
+    "clear_bag_x_min": 86,
+    "clear_bag_x_max": 88,
+    "clear_bag_jump_check_ms": 500,
+    "clear_bag_upper_wait_ms": 4300,
+    "clear_bag_interval_min_minutes": 10,
+    "clear_bag_interval_max_minutes": 15,
+    "clear_bag_sell_misc": true,
+    "clear_bag_align_near_walk_dist_max": 6,
+    "clear_bag_align_walk_ms_per_dist": 45,
+    "clear_bag_align_walk_ms_min": 60,
+    "clear_bag_align_walk_ms_max": 260,
+    "delete_yellow": [7, 92, 236, 183]
+  }
+}
